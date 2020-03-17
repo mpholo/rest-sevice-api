@@ -1,2 +1,8 @@
-com/learning/HelloWorldResource.class
-com/learning/JAXRSConfiguration.class
+com/learning/resources/JAXRSConfiguration.class
+com/learning/domain/Category.class
+com/learning/api/v1/model/CategoryListDTO.class
+com/learning/api/v1/mapper/CategoryMapper.class
+com/learning/resources/HelloWorldResource.class
+com/learning/resources/CategoryResource.class
+com/learning/api/v1/mapper/CategoryMapperImpl.class
+com/learning/api/v1/model/CategoryDTO.class
