@@ -57,6 +57,11 @@ public class CategoryResource {
        Category category = categoryList.stream()
                 .filter(c -> c.getName().equals(name))
                 .findFirst().orElse(null);
+
+       if(category==null) {
+           throw  new BadRequestException("Id must match path parameter");
+       }
+
        CategoryDTO categoryDTO = categoryMapper.categoryToCategoryDTO(category);
 
        return Response.ok(categoryDTO).build();
@@ -87,14 +92,21 @@ public class CategoryResource {
     public Response updateCategory(@PathParam("id") String id,CategoryDTO categoryDTO) {
 
         Optional<CategoryDTO> searchedCategoryDTO = findCategory(id);
+
+        if(!searchedCategoryDTO.isPresent()) {
+            throw  new WebApplicationException("Id must match path parameter",Response.Status.BAD_REQUEST);
+        }
+
         searchedCategoryDTO.ifPresent( c-> {
 
             for(int i=0;i<categoryList.size();i++) {
               if(c.getId()==categoryList.get(i).getId())
                 categoryList.set(i,categoryMapper.categoryDTOToCategory(categoryDTO));
             }
+
                 }
         );
+
 
         return Response.ok().build();
 
@@ -105,7 +117,7 @@ public class CategoryResource {
     @ApiOperation(value = "This will delete category",notes = "Delete category")
     @DELETE
     @Path("/{isbn}")
-    public Response deleteCategory(@PathParam("isbn") String id) {
+    public Response deleteCategory(@PathParam("id") String id) {
         Optional<CategoryDTO> searchedCategory = findCategory(id);
         searchedCategory.ifPresent(a->{
             categoryList.remove(categoryMapper.categoryDTOToCategory(a));
@@ -116,7 +128,7 @@ public class CategoryResource {
 
     private Optional<CategoryDTO> findCategory(@PathParam("id") String id) {
         return categoryList.stream()
-                .filter(a->a.getId()==Long.valueOf(id))
+                .filter(a->a.getId().equals(Long.valueOf(id)))
                 .map(categoryMapper::categoryToCategoryDTO)
                 .findFirst();
     }
