@@ -1,4 +1,4 @@
-/home/mpholo/repository/rest-sevice-api/src/main/java/com/learning/resources/JAXRSConfiguration.java
+/home/mpholo/repository/rest-sevice-api/src/main/java/com/learning/JAXRSConfiguration.java
 /home/mpholo/repository/rest-sevice-api/src/main/java/com/learning/domain/Category.java
 /home/mpholo/repository/rest-sevice-api/src/main/java/com/learning/resources/HelloWorldResource.java
 /home/mpholo/repository/rest-sevice-api/src/main/java/com/learning/api/v1/model/CategoryDTO.java

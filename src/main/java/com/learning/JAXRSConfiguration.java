@@ -1,20 +1,22 @@
-package com.learning.resources;
+package com.learning;
 
+import com.learning.resources.CategoryResource;
 import io.swagger.jaxrs.config.BeanConfig;
 
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
 //http://localhost:8080/rest-service-api/rest/swagger.json
 
-//@ApplicationPath("/rest")
+//@ApplicationPath("rest")
 public class JAXRSConfiguration extends Application
 {
 
 
     public JAXRSConfiguration() {
-        //swagger JAX-RS JSON Generation BEGINS
+//        swagger JAX-RS JSON Generation BEGINS
         BeanConfig beanConfig = new BeanConfig();
         beanConfig.setVersion("2.0.0");
         beanConfig.setSchemes(new String[]{"http"});
@@ -33,7 +35,7 @@ public class JAXRSConfiguration extends Application
     public Set<Class<?>>  getClasses() {
         HashSet<Class<?>> set = new HashSet<>();
 
-        set.add(HelloWorldResource.class);
+//        set.add(HelloWorldResource.class);
         set.add(CategoryResource.class);
 
         set.add(io.swagger.jaxrs.listing.ApiListingResource.class);

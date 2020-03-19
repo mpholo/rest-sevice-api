@@ -1,4 +1,4 @@
-com/learning/resources/JAXRSConfiguration.class
+com/learning/JAXRSConfiguration.class
 com/learning/domain/Category.class
 com/learning/api/v1/model/CategoryListDTO.class
 com/learning/api/v1/mapper/CategoryMapper.class

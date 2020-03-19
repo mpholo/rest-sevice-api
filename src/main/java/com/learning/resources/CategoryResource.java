@@ -7,19 +7,21 @@ import com.learning.domain.Category;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Stateless
 @Api("category")
-@Path("category")
+@Path("/categories")
 public class CategoryResource {
 
     @Inject
@@ -60,6 +62,65 @@ public class CategoryResource {
        return Response.ok(categoryDTO).build();
 
     }
+
+    @ApiOperation(value = "This will create new category",notes = "Add new category by specifing all required fields")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createCategory(CategoryDTO categoryDTO) {
+
+        Category category = categoryMapper.categoryDTOToCategory(categoryDTO);
+        categoryList.add(category);
+        CategoryDTO newCategoryDTO = categoryMapper.categoryToCategoryDTO(category);
+
+        URI location = UriBuilder.fromResource(CategoryResource.class)
+                .path("/{id}")
+                .resolveTemplate("id",newCategoryDTO.getId())
+                .build();
+        return Response.created(location).build();
+
+    }
+
+    @ApiOperation(value = "This will update existing category",notes = "Modify category")
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateCategory(@PathParam("id") String id,CategoryDTO categoryDTO) {
+
+        Optional<CategoryDTO> searchedCategoryDTO = findCategory(id);
+        searchedCategoryDTO.ifPresent( c-> {
+
+            for(int i=0;i<categoryList.size();i++) {
+              if(c.getId()==categoryList.get(i).getId())
+                categoryList.set(i,categoryMapper.categoryDTOToCategory(categoryDTO));
+            }
+                }
+        );
+
+        return Response.ok().build();
+
+    }
+
+
+
+    @ApiOperation(value = "This will delete category",notes = "Delete category")
+    @DELETE
+    @Path("/{isbn}")
+    public Response deleteCategory(@PathParam("isbn") String id) {
+        Optional<CategoryDTO> searchedCategory = findCategory(id);
+        searchedCategory.ifPresent(a->{
+            categoryList.remove(categoryMapper.categoryDTOToCategory(a));
+        });
+
+        return Response.ok().build();
+    }
+
+    private Optional<CategoryDTO> findCategory(@PathParam("id") String id) {
+        return categoryList.stream()
+                .filter(a->a.getId()==Long.valueOf(id))
+                .map(categoryMapper::categoryToCategoryDTO)
+                .findFirst();
+    }
+
 
 
     private List<Category> initData() {

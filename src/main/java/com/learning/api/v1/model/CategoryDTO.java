@@ -1,7 +1,9 @@
 package com.learning.api.v1.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel
 public class CategoryDTO {
 
     @ApiModelProperty(value="Id",required = true)
