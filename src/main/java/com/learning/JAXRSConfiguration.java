@@ -1,5 +1,6 @@
 package com.learning;
 
+import com.learning.resources.CarResource;
 import com.learning.resources.CategoryResource;
 import com.learning.resources.EmployeeResource;
 import io.swagger.jaxrs.config.BeanConfig;
@@ -39,6 +40,7 @@ public class JAXRSConfiguration extends Application
         HashSet<Class<?>> set = new HashSet<>();
 
 //        set.add(HelloWorldResource.class);
+        set.add(CarResource.class);
         set.add(CategoryResource.class);
         set.add(EmployeeResource.class);
 

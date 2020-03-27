@@ -3,12 +3,12 @@ package com.learning.api.v1.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("CategoryDTO fields and data types")
+//@ApiModel("CategoryDTO fields and data types")
 public class CategoryDTO {
 
-    @ApiModelProperty(value="Id",required = true,example = "1",readOnly = true)
+//    @ApiModelProperty(value="Id",required = true,example = "1",readOnly = true)
     private Long id;
-    @ApiModelProperty(value="Name of Category",required = true,example = "Dairy")
+//    @ApiModelProperty(value="Name of Category",required = true,example = "Dairy")
     private String name;
 
     public Long getId() {

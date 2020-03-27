@@ -1,16 +1,17 @@
 package com.learning.api.v1.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel("EmployeeDTO fields and data types")
+import javax.json.bind.annotation.JsonbTransient;
+
+//@ApiModel("EmployeeDTO fields and data types")
 public class EmployeeDTO {
 
-    @ApiModelProperty(value = "Id",required = true,example = "1",readOnly = true)
+//    @JsonbTransient
+   // @ApiModelProperty(value = "Id",required = true,example = "1",readOnly = true)
     Long Id;
-    @ApiModelProperty(value = "First name of employee",required = true,example = "Tshepo")
+//    @ApiModelProperty(value = "First name of employee",required = true,example = "Tshepo")
     String firstName;
-    @ApiModelProperty(value = "Last name of employee",required = true,example = "Dikekeng")
+//    @ApiModelProperty(value = "Last name of employee",required = true,example = "Dikekeng")
     String LastName;
 
     public Long getId() {

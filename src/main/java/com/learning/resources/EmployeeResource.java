@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 
 
 @Api("Employees")
-@Path("employees")
+@Path("/employees")
 @Stateless
 @Produces({MediaType.APPLICATION_JSON})
 public class EmployeeResource {

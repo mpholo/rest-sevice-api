@@ -1,7 +1,10 @@
 package com.learning.domain;
 
+import javax.json.bind.annotation.JsonbTransient;
+
 public class Employee {
 
+    @JsonbTransient
     Long Id;
     String firstName;
     String LastName;
